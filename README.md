@@ -17,3 +17,13 @@ npm start
 # 运行项目
 npm run dev
 ```
+
+## 使用技术
+前端框架：**`vue2.x`**<br>
+前端路由：**`vue-router`**<br>
+前端数据存储：**`vuex`**<br>
+路由请求：**`vue-resource`**<br>
+后台开发语言：**`node.js`**<br>
+开发框架：**`express`**<br>
+数据库：**`mongodb`**<br>
+处理异步请求：**`async`**<br>
