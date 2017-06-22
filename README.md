@@ -2,7 +2,7 @@
 
 > 使用vue全家桶(vue2.x + vue-router + vue-resource + vuex) + nodeJs + mongodb开发的学校老师上课考勤应用
 
-## Build Setup
+## 运行项目
 
 ``` bash
 # 先在你的电脑安装mongodb数据库,然后启动数据库
