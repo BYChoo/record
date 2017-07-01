@@ -1,33 +1,26 @@
 # record
 
-> A Vue.js project
+> 使用vue全家桶(vue2.x + vue-router + vue-resource + vuex) + nodeJs + mongodb开发的学校老师上课考勤应用
 
-<<<<<<< HEAD
-## Build Setup
-=======
 ## 说在前面
 初学vue配合后台语言开发的时候，完全不知从何下手，网上的Demo更是少之又少。经过一段时间的学习积累，总算掳清vue单页面与服务器的关系，碰巧实训课程也有vue配合后台开发的要求，于是就动手做这个项目。
 
 ## 运行项目
->>>>>>> origin/master
 
 ``` bash
-# install dependencies
+# 先在你的电脑安装mongodb数据库,然后启动数据库
+mongod --dbpath=f:\mongodb\db
+
+# 进入到项目文件，安装依赖包
 npm install
 
-# serve with hot reload at localhost:8080
+# 运行nodeJs服务器
+npm start
+
+# 运行项目
 npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
 ```
 
-<<<<<<< HEAD
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
-=======
 ## 使用技术
 **`vue2.x`**+
 **`vue-router`**+
@@ -88,4 +81,3 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 ├── index.html                                  // 入口html文件
 .
 ```
->>>>>>> origin/master
