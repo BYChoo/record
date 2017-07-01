@@ -1,29 +1,21 @@
 # record
 
-> 使用vue全家桶(vue2.x + vue-router + vue-resource + vuex) + nodeJs + mongodb开发的学校老师上课考勤应用
+> A Vue.js project
 
-## 运行项目
+## Build Setup
 
 ``` bash
-# 先在你的电脑安装mongodb数据库,然后启动数据库
-mongod --dbpath=f:\mongodb\db
-
-# 进入到项目文件，安装依赖包
+# install dependencies
 npm install
 
-# 运行nodeJs服务器
-npm start
-
-# 运行项目
+# serve with hot reload at localhost:8080
 npm run dev
+
+# build for production with minification
+npm run build
+
+# build for production and view the bundle analyzer report
+npm run build --report
 ```
 
-## 使用技术
-前端框架：**`vue2.x`**<br>
-前端路由：**`vue-router`**<br>
-前端数据存储：**`vuex`**<br>
-路由请求：**`vue-resource`**<br>
-后台开发语言：**`node.js`**<br>
-开发框架：**`express`**<br>
-数据库：**`mongodb`**<br>
-处理异步请求：**`async`**<br>
+For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

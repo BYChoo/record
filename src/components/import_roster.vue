@@ -16,10 +16,12 @@
 			<button @click=" uploadFile ">保存名册</button>
 		</form>
 		<div class="mask" v-if=" showRoster "></div>
+		<msgBox :config=" config " @closeBox=" closeBox "></msgBox>
 	</div>
 </template>
 
 <script>
+	import msgBox from './common/msgBox.vue';
 	export default {
 		name: 'import_roster',
 		title: '导入名册',
@@ -27,11 +29,26 @@
 			return {
 				csvFile: '',
 				restor_cls: '',
-				error: ''
+				error: '',
+				config: {
+					showBox: false, // 弹出框主体显示
+					showMask: false, // 弹出框遮罩显示
+					text: '', // 弹出框文字
+					title: '' // 弹出框标题
+				}
 			}
+		},
+		components: {
+			 msgBox
 		},
 		props:['showRoster'],
 		methods: {
+			closeBox() {
+				this.config.showBox = false;
+				this.config.showMask = false;
+				this.config.text = '';
+				this.config.title = '';
+			},
 			close() {
 				this.$emit('changeShow',false);
 			},
@@ -56,9 +73,16 @@
 				this.$http.post('/api/uploadFile',formData)
 					.then((respone) => {
 						if(respone.body == 'fail') {
-							alert('该班级已存在');
+							this.config.showBox = true;
+							this.config.showMask = true;
+							this.config.text = '该名册已存在';
+							this.config.title = '保存失败';
 							return;
 						}
+							this.config.showBox = true;
+							this.config.showMask = true;
+							this.config.text = '该名册已保存';
+							this.config.title = '保存成功';
 						_self.$emit('changeShow',false);
 					})
 					.catch((error) => {
