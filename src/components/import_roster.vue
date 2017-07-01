@@ -79,10 +79,10 @@
 							this.config.title = '保存失败';
 							return;
 						}
-							this.config.showBox = true;
-							this.config.showMask = true;
-							this.config.text = '该名册已保存';
-							this.config.title = '保存成功';
+						this.config.showBox = true;
+						this.config.showMask = true;
+						this.config.text = '该名册已保存';
+						this.config.title = '保存成功';
 						_self.$emit('changeShow',false);
 					})
 					.catch((error) => {

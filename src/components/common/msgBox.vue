@@ -54,7 +54,8 @@
     display: inline-block;
     vertical-align: middle;
     background-color: #fff;
-    width: 420px;
+    width: 80%;
+   	max-width: 400px;
     border-radius: 3px;
     font-size: 16px;
     overflow: hidden;

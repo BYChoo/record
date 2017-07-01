@@ -19,10 +19,12 @@
 			</div>
 			<button>登录</button>  
 		</form>
+		<msgBox :config=" config " @closeBox=" closeBox "></msgBox>
 	</div>
 </template>
 
 <script>
+	import msgBox from './common/msgBox.vue';
 	export default {
 		name: 'login',
 		data() {
@@ -30,15 +32,33 @@
 				user: {
 					name: '',
 					password: ''
+				},
+				config: {
+					showBox: false, // 弹出框主体显示
+					showMask: false, // 弹出框遮罩显示
+					text: '', // 弹出框文字
+					title: '' // 弹出框标题
 				}
 			}
 		},
+		components: {
+			 msgBox
+		},
 		methods: {
+			closeBox() {
+				this.config.showBox = false;
+				this.config.showMask = false;
+				this.config.text = '';
+				this.config.title = '';
+			},
 			send_login() {
 				this.$http.post('/api/login',this.user)
 					.then((respone) => {
 						if(respone.body == 'fail') {
-							alert('请输入正确的邮箱和密码');
+							this.config.showBox = true;
+							this.config.showMask = true;
+							this.config.text = '请检查用户邮箱或密码是否正确';
+							this.config.title = '登录失败';
 						}	else {
 							this.$store.commit('SET_CURUSER',respone.body[0]);
 							this.$router.push('/');

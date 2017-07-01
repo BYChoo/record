@@ -47,10 +47,12 @@
 			</div>
 			<button>注册</button>  
 		</form>
+		<msgBox :config=" config " @closeBox=" closeBox "></msgBox>
 	</div>
 </template>
 
 <script>
+	import msgBox from './common/msgBox.vue';
 	export default {
 		name: 'register',
 		data() {
@@ -64,10 +66,25 @@
 					password_repeat: '',
 					deparment: '',
 					position: ''
+				},
+				config: {
+					showBox: false, // 弹出框主体显示
+					showMask: false, // 弹出框遮罩显示
+					text: '', // 弹出框文字
+					title: '' // 弹出框标题
 				}
 			}
 		},
+		components: {
+			 msgBox
+		},
 		methods: {
+			closeBox() {
+				this.config.showBox = false;
+				this.config.showMask = false;
+				this.config.text = '';
+				this.config.title = '';
+			},
 			send_register() {
 				if(this.user.password != this.user.password_repeat) {
 					return false;
@@ -75,7 +92,10 @@
 				this.$http.post('/api/register',this.user)
 					.then((respone) => {
 						if(respone.body == 'fail') {
-							alert('该邮箱已被使用');
+							this.config.showBox = true;
+							this.config.showMask = true;
+							this.config.text = '该邮箱已被使用';
+							this.config.title = '注册失败';
 						}	else {
 							this.$store.commit('SET_CURUSER',respone.body);
 							this.$router.push('/');

@@ -9,10 +9,12 @@
 			</li>
 		</ul>
 		<button @click=" send_cutStudents " v-if=" flicker ">提交</button>
+		<msgBox :config=" config " @closeBox=" closeBox "></msgBox>
 	</div>
 </template>
 
 <script>
+	import msgBox from './common/msgBox.vue';
 	import topBar from '../components/common/topBar.vue';
 	export default {
 		name: 'cls_call',
@@ -20,10 +22,22 @@
 			return {
 				curcls: [],
 				cutStudents: [],
-				flicker: false
+				flicker: false,
+				config: {
+					showBox: false, // 弹出框主体显示
+					showMask: false, // 弹出框遮罩显示
+					text: '', // 弹出框文字
+					title: '' // 弹出框标题
+				}
 			}
 		},
 		methods: {
+			closeBox() {
+				this.config.showBox = false;
+				this.config.showMask = false;
+				this.config.text = '';
+				this.config.title = '';
+			},
 			addStudent(person,e) {
 				var i;
 				if(e.target.tagName.toLocaleLowerCase() == 'li') {
@@ -64,14 +78,18 @@
 					time,
 					email
 				}).then((respone) => {
-					this.$router.push('/');
+					this.config.showBox = true;
+					this.config.showMask = true;
+					this.config.text = '缺勤学生已记录';
+					this.config.title = '记录成功';
 				}).catch((err) => {
 					console.log(err);
 				})
 			}
 		},
 		components: {
-			topBar
+			topBar,
+			msgBox
 		},
 		created() {
 			if(this.$store.state.cls.curDate == '') {
