@@ -52,9 +52,10 @@
 </template>
 
 <script>
-	import msgBox from './common/msgBox.vue';
+	import mixin_msgBox from '../mixin/msgBox.js';
 	export default {
 		name: 'register',
+		mixins: [mixin_msgBox],
 		data() {
 			return {
 				position_arr: ['','教授','副教授','讲师'],
@@ -66,25 +67,10 @@
 					password_repeat: '',
 					deparment: '',
 					position: ''
-				},
-				config: {
-					showBox: false, // 弹出框主体显示
-					showMask: false, // 弹出框遮罩显示
-					text: '', // 弹出框文字
-					title: '' // 弹出框标题
 				}
 			}
 		},
-		components: {
-			 msgBox
-		},
 		methods: {
-			closeBox() {
-				this.config.showBox = false;
-				this.config.showMask = false;
-				this.config.text = '';
-				this.config.title = '';
-			},
 			send_register() {
 				if(this.user.password != this.user.password_repeat) {
 					return false;
@@ -92,10 +78,7 @@
 				this.$http.post('/api/register',this.user)
 					.then((respone) => {
 						if(respone.body == 'fail') {
-							this.config.showBox = true;
-							this.config.showMask = true;
-							this.config.text = '该邮箱已被使用';
-							this.config.title = '注册失败';
+							this.changeCfg('该邮箱已被使用','注册失败');
 						}	else {
 							this.$store.commit('SET_CURUSER',respone.body);
 							this.$router.push('/');

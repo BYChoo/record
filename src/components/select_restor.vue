@@ -42,7 +42,6 @@
 				this.$router.push('/');
 				return;
 			};
-			console.log(this.$store.state.user.user.user_email)
 			let _self = this;
 			this.$http.get('/api/get_allRestor',{
 				params: {

@@ -21,34 +21,20 @@
 </template>
 
 <script>
-	import msgBox from './common/msgBox.vue';
+	import mixin_msgBox from '../mixin/msgBox.js';
 	export default {
 		name: 'import_roster',
 		title: '导入名册',
+		mixins: [mixin_msgBox],
 		data() {
 			return {
 				csvFile: '',
 				restor_cls: '',
-				error: '',
-				config: {
-					showBox: false, // 弹出框主体显示
-					showMask: false, // 弹出框遮罩显示
-					text: '', // 弹出框文字
-					title: '' // 弹出框标题
-				}
+				error: ''
 			}
-		},
-		components: {
-			 msgBox
 		},
 		props:['showRoster'],
 		methods: {
-			closeBox() {
-				this.config.showBox = false;
-				this.config.showMask = false;
-				this.config.text = '';
-				this.config.title = '';
-			},
 			close() {
 				this.$emit('changeShow',false);
 			},
@@ -73,16 +59,10 @@
 				this.$http.post('/api/uploadFile',formData)
 					.then((respone) => {
 						if(respone.body == 'fail') {
-							this.config.showBox = true;
-							this.config.showMask = true;
-							this.config.text = '该名册已存在';
-							this.config.title = '保存失败';
+							this.changeCfg('该名册已存在','保存失败');
 							return;
 						}
-						this.config.showBox = true;
-						this.config.showMask = true;
-						this.config.text = '该名册已保存';
-						this.config.title = '保存成功';
+						this.changeCfg('该名册已保存','保存成功');
 						_self.$emit('changeShow',false);
 					})
 					.catch((error) => {

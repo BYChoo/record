@@ -14,30 +14,19 @@
 </template>
 
 <script>
-	import msgBox from './common/msgBox.vue';
+	import mixin_msgBox from '../mixin/msgBox.js';
 	import topBar from '../components/common/topBar.vue';
 	export default {
 		name: 'cls_call',
+		mixins: [mixin_msgBox],
 		data() {
 			return {
 				curcls: [],
 				cutStudents: [],
-				flicker: false,
-				config: {
-					showBox: false, // 弹出框主体显示
-					showMask: false, // 弹出框遮罩显示
-					text: '', // 弹出框文字
-					title: '' // 弹出框标题
-				}
+				flicker: false
 			}
 		},
 		methods: {
-			closeBox() {
-				this.config.showBox = false;
-				this.config.showMask = false;
-				this.config.text = '';
-				this.config.title = '';
-			},
 			addStudent(person,e) {
 				var i;
 				if(e.target.tagName.toLocaleLowerCase() == 'li') {
@@ -78,18 +67,14 @@
 					time,
 					email
 				}).then((respone) => {
-					this.config.showBox = true;
-					this.config.showMask = true;
-					this.config.text = '缺勤学生已记录';
-					this.config.title = '记录成功';
+					this.changeCfg('缺勤学生已记录','记录成功');
 				}).catch((err) => {
 					console.log(err);
 				})
 			}
 		},
 		components: {
-			topBar,
-			msgBox
+			topBar
 		},
 		created() {
 			if(this.$store.state.cls.curDate == '') {
