@@ -48,7 +48,7 @@ router.post('/uploadFile', (req, res) => {
             }
           })
         },
-        function() {
+        function(cb) {
           for (let i = 0; i < data.length; i++) { // 插入名册同学数据
             cls_numbers++;
             let curPerson = data[i];
@@ -76,9 +76,11 @@ router.post('/uploadFile', (req, res) => {
             fn(err, row) {
               if (err) console.log(err);
               res.send('success');
+              cb(null);
             }
           });
-
+        },
+        function() {
           fs.unlink(parsePath, (err) => { // 删除临时文件
             if (err) console.log(err);
           })
