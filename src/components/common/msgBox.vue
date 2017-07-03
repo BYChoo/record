@@ -46,9 +46,6 @@
 </script>
 
 <style lang="scss" scoped>
-	#msgBox{
-
-	}
 	.box {
 		text-align: left;
     display: inline-block;

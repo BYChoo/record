@@ -60,9 +60,12 @@
 					.then((respone) => {
 						if(respone.body == 'fail') {
 							this.changeCfg('该名册已存在','保存失败');
+							_self.$emit('changeShow',false);
 							return;
 						}
 						this.changeCfg('该名册已保存','保存成功');
+						this.csvFile = '';
+						this.restor_cls = '';
 						_self.$emit('changeShow',false);
 					})
 					.catch((error) => {
