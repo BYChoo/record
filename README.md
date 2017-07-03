@@ -58,7 +58,7 @@ npm run dev
 │   │   ├── check_work.vue                      // 查看缺勤组件
 │   │   ├── cls_call.vue                        // 登记缺勤组件
 │   │   ├── import_roster.vue                   // 导入组件
-│   │   ├── login.vue                           // 租金组件
+│   │   ├── login.vue                           // 登录组件
 │   │   ├── register.vue                        // 注册组件
 │   │   ├── restor.vue                          // 列表组件
 │   │   ├── select_cls.vue                      // 选择班级组件
