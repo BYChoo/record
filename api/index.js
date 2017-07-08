@@ -96,9 +96,17 @@ router.post('/uploadFile', (req, res) => {
 
 // 获取所有名册
 router.get('/get_allRestor', (req, res) => {
+  let page = req.query.page; // 加载的页数
+  let rows = 10; // 查询的行数
+  console.log(page);
+
   Cls.findOne({
     cls: {
       user_email: req.query.user_email
+    },
+    option: {
+      skip: (page - 1) * rows,
+      limit: rows
     },
     fn(err, row) {
       if (err) console.log(err);

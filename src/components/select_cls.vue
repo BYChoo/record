@@ -111,6 +111,7 @@
 		color: #000;
 	}
 	.item{
+		cursor: pointer;
 		padding: 20px;
 		border-bottom: 1px solid #f3f3f4;
 		color: #000;

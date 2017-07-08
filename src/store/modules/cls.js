@@ -7,7 +7,7 @@ const state = {
 
 const mutations = {
 	[types.SET_ALLCLS] (state, cls) {
-		state.allCls = cls;
+		state.allCls = state.allCls.concat(cls);
 	},
 	[types.SET_CURDATE] (state, date) {
 		state.curDate = date;
