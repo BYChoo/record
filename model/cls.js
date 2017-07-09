@@ -42,7 +42,15 @@ cls.prototype.findOne = function(obj) {
   cls_model.find(obj.cls, (err, row) => {
     if (err) obj.fn(err, row);
     obj.fn(null, row);
-  }).skip(obj.option.skip).limit(obj.option.limit)
+  })
+}
+
+// 查找某班级数据,按需加载
+cls.prototype.find = function(obj) {
+  cls_model.find(obj.cls, (err, row) => {
+    if (err) obj.fn(err, row);
+    obj.fn(null, row);
+  }).skip(obj.option.skip).limit(obj.option.limit);
 }
 
 module.exports = new cls();

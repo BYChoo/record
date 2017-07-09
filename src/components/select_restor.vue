@@ -60,7 +60,7 @@
 						}
 					})
 						.then((respone) => {
-							this.$store.commit('SET_ALLCLS',respone.data);
+							this.$store.commit('CONCAT_ALLCLS',respone.data);
 							this.canLoading = true;
 						})
 						.catch((error) => {
