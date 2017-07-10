@@ -91,8 +91,6 @@
 						window.clearTimeout(timer);
 						timer = window.setTimeout(fn,delay);
 						prevTime = now;
-					}	else {
-						console.log('在延迟范围内,不作任何执行');
 					}
 				}
 			}
@@ -107,7 +105,7 @@
 		},	
 		mounted() {
 			let _self = this;
-			window.addEventListener('scroll',_self.throotle(_self.getClsData,500,2500), true);
+			window.onscroll = (_self.throotle(_self.getClsData,500,2000));
 		},
 		created() {
 			if(this.$store.state.cls.curDate == '') {
@@ -120,12 +118,12 @@
 					page: this.page
 				}
 			})
-				.then((respone) => {
-					this.$store.commit('SET_ALLCLS',respone.data);
-				})
-				.catch((error) => {
-					console.log(error);
-				})
+			.then((respone) => {
+				this.$store.commit('SET_ALLCLS',respone.data);
+			})
+			.catch((error) => {
+				console.log(error);
+			})
 		}
 	}
 </script>
