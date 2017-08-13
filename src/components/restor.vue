@@ -17,8 +17,8 @@
 </template>
 
 <script>
-	import importRoster from '../components/import_roster.vue';
-	import topBar from '../components/common/topBar.vue';
+	import importRoster from 'components/import_roster.vue';
+	import topBar from 'components/common/topBar.vue';
 	export default {
 		name: 'restor',
 		data() {

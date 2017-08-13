@@ -3,15 +3,15 @@ import Router from 'vue-router';
 
 Vue.use(Router);
 
-const calendar      = () => import ('../components/calendar.vue');
-const restor        = () => import ('../components/restor.vue');
-const import_restor = () => import ('../components/import_roster.vue');
-const select_restor = () => import ('../components/select_restor.vue');
-const check_work    = () => import ('../components/check_work.vue');
-const cls_call      = () => import('../components/cls_call.vue');
-const select_cls    = () => import('../components/select_cls.vue');
-const register      = () => import('../components/register.vue');
-const login         = () => import('../components/login.vue');
+const calendar = resolve => require(['components/calendar.vue'], resolve);
+const restor = resolve => require(['components/restor.vue'], resolve);
+const import_restor = resolve => require(['components/import_roster.vue'], resolve);
+const select_restor = resolve => require(['components/select_restor.vue'], resolve);
+const check_work = resolve => require(['components/check_work.vue'], resolve);
+const cls_call = resolve => require(['components/cls_call.vue'], resolve);
+const select_cls = resolve => require(['components/select_cls.vue'], resolve);
+const register = resolve => require(['components/register.vue'], resolve);
+const login = resolve => require(['components/login.vue'], resolve);
 
 export default new Router({
   mode: 'history',
