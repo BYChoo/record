@@ -13,6 +13,8 @@ export default {
 </script>
 
 <style>
+@import './assets/css/base.css';
+@import './assets/css/font-awesome-4.7.0.min.css';
 .component-fade-enter-active, .component-fade-leave-active {
   transition: opacity .3s ease;
 }

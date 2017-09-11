@@ -15,6 +15,10 @@ const User = require('../model/user.js');
 
 // 挂载路由: "/api"
 
+router.get('/test',(req,res) => {
+  res.send('success');
+})
+
 // 上传班级文件并存入数据库
 router.post('/uploadFile', (req, res) => {
   var form = new formidable.IncomingForm(); // 创建上传表单  

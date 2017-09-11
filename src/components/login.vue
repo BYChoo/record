@@ -24,7 +24,7 @@
 </template>
 <script>
 import mixin_msgBox from '../mixin/msgBox.js';
-import { sendLogin } from 'api/login';
+import { sendLogin, setCookie, getCookie } from 'api/login';
 export default {
   name: 'login',
   mixins: [mixin_msgBox],
@@ -43,6 +43,8 @@ export default {
           if (respone.body == 'fail') {
             this.changeCfg('请检查用户邮箱或密码是否正确', '登录失败');
           } else {
+            setCookie({ name: 'token', val: respone.data[0].user_email });
+            // getCookie('token');
             this.$store.commit('SET_CURUSER', respone.data[0]);
             this.$router.push('/');
           }
@@ -80,6 +82,8 @@ export default {
       padding-bottom: 5px;
     }
     input {
+      -webkit-box-shadow: 0 0 0px 1000px white inset;
+      outline: none;
       width: 100%;
       height: 30px;
       border: none;

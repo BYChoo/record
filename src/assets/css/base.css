@@ -217,7 +217,7 @@ html,body{
 }
 
 .clearfix:before{
-  content: '',
+  content: '';
   height: 0;
   visibility: hidden;
   overflow: hidden;
