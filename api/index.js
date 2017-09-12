@@ -15,7 +15,7 @@ const User = require('../model/user.js');
 
 // 挂载路由: "/api"
 
-router.get('/test',(req,res) => {
+router.get('/test', (req, res) => {
   res.send('success');
 })
 
@@ -42,8 +42,8 @@ router.post('/uploadFile', (req, res) => {
               user_email,
               cls_name
             },
-            fn(err,row) {
-              if(row.length > 0) {
+            fn(err, row) {
+              if (row.length > 0) {
                 res.send('fail');
                 return;
               } else {
@@ -284,6 +284,26 @@ router.post('/login', (req, res) => {
     obj,
     fn(err, row) {
       if (err) console.log(err);
+      if (row.length <= 0) {
+        res.send('fail');
+      } else {
+        res.send(row);
+      }
+    }
+  })
+});
+
+// cookie获取用户信息
+router.post('/cookieLogin', (req, res) => {
+  let obj = {
+    user_email: req.body.token
+  }
+  console.log('-------------------------------');
+  console.log(obj);
+  User.find({
+    obj,
+    fn(err, row) {
+      if (err) throw new Error('查询出错');
       if (row.length <= 0) {
         res.send('fail');
       } else {

@@ -24,7 +24,8 @@
 </template>
 <script>
 import mixin_msgBox from '../mixin/msgBox.js';
-import { sendLogin, setCookie, getCookie } from 'api/login';
+import { sendLogin } from 'api/login';
+import { setCookie } from 'api/user';
 export default {
   name: 'login',
   mixins: [mixin_msgBox],
@@ -44,7 +45,6 @@ export default {
             this.changeCfg('请检查用户邮箱或密码是否正确', '登录失败');
           } else {
             setCookie({ name: 'token', val: respone.data[0].user_email });
-            // getCookie('token');
             this.$store.commit('SET_CURUSER', respone.data[0]);
             this.$router.push('/');
           }

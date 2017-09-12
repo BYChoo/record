@@ -33,6 +33,7 @@
 <script>
 import restor from './restor.vue';
 import { getCaledarDay, checkAbsent } from 'api/calendar';
+import { setCookie, getCookie, cookieLogin } from 'api/user';
 export default {
   name: 'datePicker',
   data() {
@@ -224,14 +225,26 @@ export default {
       this.monthData = this.getMonthDate();
     }
   },
-  beforeMount() {
-    if (!this.$store.state.user.user.user_email) {
+  created() {
+    let token = getCookie('token');
+    if (token === null) {
       this.$router.push('/login');
+    } else {
+      let email = this.$store.state.user.user.user_email;
+      if (email === '' || email === null || email === undefined) {
+        this.$store.dispatch('SET_USER', token)
+          .then(() => {
+            this.init();
+            this.set_absentDay();
+          })
+          .catch(err => {
+            throw new Error(err);
+          })
+      } else {
+        this.init();
+        this.set_absentDay();
+      }
     }
-    let _self = this;
-    this.init();
-    // 判断日期是否有人缺勤
-    this.set_absentDay();
   },
 }
 

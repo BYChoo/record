@@ -13,7 +13,7 @@ const select_cls = resolve => require(['components/select_cls.vue'], resolve);
 const register = resolve => require(['components/register.vue'], resolve);
 const login = resolve => require(['components/login.vue'], resolve);
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   scrollBehavior: () => {
     y: 0
@@ -55,4 +55,6 @@ export default new Router({
     name: 'login',
     component: login
   }]
-})
+});
+
+export default router;
