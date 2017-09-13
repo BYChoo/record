@@ -70,6 +70,7 @@ export default {
           email
         })
         .then((respone) => {
+          console.log(respone);
           /**
            * 这里后续还要优化,这样写性能消耗比较大
            * 优化方案:数据库结构优化

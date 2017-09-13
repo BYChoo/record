@@ -15,10 +15,6 @@ const User = require('../model/user.js');
 
 // 挂载路由: "/api"
 
-router.get('/test', (req, res) => {
-  res.send('success');
-})
-
 // 上传班级文件并存入数据库
 router.post('/uploadFile', (req, res) => {
   var form = new formidable.IncomingForm(); // 创建上传表单  
@@ -154,6 +150,7 @@ router.post('/add_cutStudents', (req, res) => {
       absent.insert({
         obj: {
           cls_name: req.body.cls_name,
+          absend_date: `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`,
           absend_year: `${now.getFullYear()}`,
           absend_month: `${now.getMonth() + 1}`,
           absend_day: `${now.getDate()}`,

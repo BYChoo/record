@@ -106,23 +106,6 @@ export default {
           throw new Error(error);
         });
 
-      // 判断日期是否是否有人缺勤
-      // this.monthArr.forEach((row, index) => {
-      //   row.forEach((r_item, r_index) => {
-      //     let dateStr = `${r_item.year}-${r_item.month}-${r_item.showDate}`;
-      //     getCaledarDay({ date: dateStr, email })
-      //       .then((respone) => {
-      //         if (_self.getToday(r_item.year, r_item.month, r_item.showDate)) {
-      //           _self.$set(r_item, 'flag', 0);
-      //           return;
-      //         }
-      //         _self.$set(r_item, 'flag', respone.data.flag);
-      //       })
-      //       .catch((error) => {
-      //         throw new Error(error);
-      //       });
-      //   })
-      // });
     },
     get_absentDay(year, month, date) {
       if (!year || !month || !date) {
@@ -260,7 +243,7 @@ export default {
   },
   created() {
     let token = getCookie('token');
-    if (token === null) {
+    if (token === 'undefined') {
       this.$router.push('/login');
     } else {
       let email = this.$store.state.user.user.user_email;

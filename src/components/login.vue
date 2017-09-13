@@ -41,7 +41,7 @@ export default {
     send_login() {
       sendLogin(this.user)
         .then((respone) => {
-          if (respone.body == 'fail') {
+          if (respone.data == 'fail') {
             this.changeCfg('请检查用户邮箱或密码是否正确', '登录失败');
           } else {
             setCookie({ name: 'token', val: respone.data[0].user_email });
