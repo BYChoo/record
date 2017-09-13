@@ -145,7 +145,7 @@ router.post('/add_cutStudents', (req, res) => {
           cls_name: req.body.cls_name
         },
         fn(err, row) {
-          if (err) console.log(err);
+          if (err) throw new Error(err);
           cb(null, row[0].cls_numbers);
         }
       })
@@ -154,7 +154,9 @@ router.post('/add_cutStudents', (req, res) => {
       absent.insert({
         obj: {
           cls_name: req.body.cls_name,
-          absend_date: `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`,
+          absend_year: `${now.getFullYear()}`,
+          absend_month: `${now.getMonth() + 1}`,
+          absend_day: `${now.getDate()}`,
           absend_time: req.body.time,
           students: req.body.cutStudents,
           cls_numbers: nums,
@@ -175,7 +177,7 @@ router.post('/add_cutStudents', (req, res) => {
 router.get('/get_dayAbsent', (req, res) => {
   let absend_date = req.query.objDate;
   let cls_name = req.query.cls_name;
-  let user_email = req.query.email
+  let user_email = req.query.email;
   absent.find({
     obj: {
       cls_name,
@@ -214,19 +216,20 @@ router.get('/get_noTodayAbsent', (req, res) => {
 
 // 判断日期是否有人迟到
 router.get('/get_caledarDay', (req, res) => {
-  let absend_date = req.query.date;
-  let user_email = req.query.email;
+  const absend_year = req.query.year;
+  const absend_month = req.query.month;
+  const user_email = req.query.email;
   absent.find({
     obj: {
-      absend_date,
+      absend_year,
+      absend_month,
       user_email
     },
     fn(err, row) {
-      if (err) console.log(err);
+      if (err) throw new Error(err);
       if (row) {
-        res.send({
-          date: absend_date,
-          flag: row.length
+        res.json({
+          data: row 
         });
       }
     }

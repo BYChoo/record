@@ -11,8 +11,19 @@ var absent_schema = new Schema({
     required: true
   },
   absend_date: { // 缺席的日期
+    type: String
+  },
+  absend_year: {
     type: String,
-    required: true
+    required: true,
+  },
+  absend_month: {
+    type: String,
+    required: true,
+  },
+  absend_day: {
+    type: String,
+    required: true,
   },
   absend_time: {
     type:String,

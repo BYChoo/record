@@ -70,26 +70,59 @@ export default {
     }
   },
   methods: {
-    set_absentDay() {
-      let _self = this;
-      let email = this.$store.state.user.user.user_email;
-      // 判断日期是否是否有人缺勤
+    // 日期匹配辅助函数
+    filter({ year, month, day }) {
+      let result = null;
       this.monthArr.forEach((row, index) => {
-        row.forEach((r_item, r_index) => {
-          let dateStr = `${r_item.year}-${r_item.month}-${r_item.showDate}`;
-          getCaledarDay({ date: dateStr, email })
-            .then((respone) => {
-              if (_self.getToday(r_item.year, r_item.month, r_item.showDate)) {
-                _self.$set(r_item, 'flag', 0);
-                return;
-              }
-              _self.$set(r_item, 'flag', respone.data.flag);
-            })
-            .catch((error) => {
-              throw new Error(error);
-            });
-        })
+        let res = row.find((item) => {
+          return new Date(item.year, item.month, item.date).getTime() == new Date(Number(year), Number(month), Number(day)).getTime();
+        });
+        if (res !== undefined) {
+          result = res;
+          return;
+        }
       });
+      return result;
+    },
+
+    // 设置当前日期是否显示迟到
+    set_absentDay() {
+      const _self = this;
+      const email = this.$store.state.user.user.user_email;
+      getCaledarDay({ year: this.monthData.year, month: this.monthData.month, email })
+        .then((respone) => {
+          console.log(respone);
+          respone.data.data.forEach((item, index) => {
+            let day = this.filter({
+              year: item.absend_year,
+              month: item.absend_month,
+              day: item.absend_day
+            });
+            let flag = this.getToday(item.absend_year, item.absend_month, item.absend_day);
+            flag ? this.$set(day, 'flag', 0) : this.$set(day, 'flag', 1);
+          })
+        })
+        .catch((error) => {
+          throw new Error(error);
+        });
+
+      // 判断日期是否是否有人缺勤
+      // this.monthArr.forEach((row, index) => {
+      //   row.forEach((r_item, r_index) => {
+      //     let dateStr = `${r_item.year}-${r_item.month}-${r_item.showDate}`;
+      //     getCaledarDay({ date: dateStr, email })
+      //       .then((respone) => {
+      //         if (_self.getToday(r_item.year, r_item.month, r_item.showDate)) {
+      //           _self.$set(r_item, 'flag', 0);
+      //           return;
+      //         }
+      //         _self.$set(r_item, 'flag', respone.data.flag);
+      //       })
+      //       .catch((error) => {
+      //         throw new Error(error);
+      //       });
+      //   })
+      // });
     },
     get_absentDay(year, month, date) {
       if (!year || !month || !date) {
