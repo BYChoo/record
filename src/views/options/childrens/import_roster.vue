@@ -156,4 +156,38 @@ export default {
   background-color: rgba(0, 0, 0, .3);
 }
 
+
+/**
+ * 电脑大屏幕：>= 1200px
+ */
+
+@media screen and (min-width: 1200px) {
+  #myForm {
+    max-width: 300px;
+  }
+}
+
+/**
+ * 电脑中等屏幕：>= 992px
+ */
+
+@media screen and (min-width: 992px) {
+  #myForm {
+    max-width: 280px;
+  }
+}
+
+/**
+ * 平板电脑：>= 768px
+ */
+
+@media screen and (min-width: 768px) {}
+
+
+/**
+ * 手机移动端：<= 767px
+ */
+
+@media screen and (max-width: 767px) {}
+
 </style>

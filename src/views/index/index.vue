@@ -17,10 +17,9 @@
           </thead>
           <tbody>
             <tr v-for=" (row,r_index) in monthArr " :key=" r_index ">
-              <td v-for=" (item,i_index) in row " :key=" i_index " @click=" changeUrl(`${item.year}-${item.month}-${item.showDate}`) ">
-                <span :class=" {nowDate: getToday(item.year,item.month,item.showDate)} ">{{ item.showDate }}</span>
+              <td v-for=" (item,i_index) in row " :key=" i_index " @click=" changeUrl(`${item.year}-${item.month}-${item.showDate}`) " :class=" {nowDate: getToday(item.year,item.month,item.showDate)} ">
+                <span>{{ item.showDate }}</span>
                 <span v-if=" item.flag > 0 " class="absent-day">有缺勤</span>
-                <span class="today" v-if="getToday(item.year,item.month,item.showDate)">今天</span>
               </td>
             </tr>
           </tbody>
@@ -100,7 +99,7 @@ export default {
           })
         })
         .catch((error) => {
-          throw new Error(error);
+          throw error;
         });
 
     },
@@ -111,7 +110,7 @@ export default {
       let str = `${year}-${month}-${date}`;
       checkAbsent({ date: str })
         .catch((error) => {
-          throw new Error(error);
+          throw error;
         })
     },
     changeUrl(date) {
@@ -251,7 +250,7 @@ export default {
             this.set_absentDay();
           })
           .catch(err => {
-            throw new Error(err);
+            throw err;
           })
       } else {
         this.init();
@@ -362,12 +361,18 @@ export default {
 
 .absent-day {
   position: absolute;
-  left: 50%;
+  left: 70%;
   top: 25%;
-  height: 50px;
-  width: 50px;
+  height: 15px;
+  line-height: 15px;
+  width: 43px;
+  -webkit-transform: translate(-50%);
   transform: translate(-50%);
   color: #f34b4b;
+  border: 1px solid #f34b4b;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  font-size: 12px;
 }
 
 .today {
@@ -381,15 +386,71 @@ export default {
   transform: translate(-50%);
 }
 
-@media screen and (max-width: 414px) {
-  .today {
-    color: #086ed5;
-    width: 42px;
+.nowDate {
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #086ed5 !important;
+}
+
+/* 电脑大屏幕：>= 1200px */
+@media screen and (min-width: 1200px) {
+  .ui-datepicker-wrapper .ui-datepicker-body table td {
+    font-size: 14px;
+    height: 120px;
+    line-height: 120px;
   }
 }
 
-.nowDate {
-  color: #f34b4b;
+/* 电脑中等屏幕：>= 992px */
+@media screen and (min-width: 992px) {
+  .ui-datepicker-wrapper .ui-datepicker-body table td {
+    font-size: 14px;
+    height: 100px;
+    line-height: 100px;
+  }
+  .absent-day {
+    left: 65%;
+    top: 25%;
+  }
+}
+
+/* 平板电脑：>= 768px */
+@media screen and (min-width: 768px) {
+  .ui-datepicker-wrapper .ui-datepicker-body table td {
+    font-size: 14px;
+    height: 80px;
+    line-height: 80px;
+  }
+  .absent-day {
+    left: 60%;
+    top: 25%;
+  }
+}
+
+
+/* 手机移动端：<= 767px */
+@media screen and (max-width: 767px) {
+  .ui-datepicker-wrapper .ui-datepicker-body table td {
+    font-size: 12px;
+    height: 65px;
+    line-height: 65px;
+  }
+  .absent-day {
+    position: absolute;
+    left: 50%;
+    top: 20%;
+    height: 50px;
+    width: 50px;
+    transform: translate(-50%);
+    color: #f34b4b;
+    line-height: 80px;
+    border: none;
+  }
+  .today {
+    height: 45px;
+    color: #086ed5;
+    width: 42px;
+  }
 }
 
 </style>

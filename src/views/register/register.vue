@@ -52,6 +52,7 @@
 </template>
 <script>
 import mixin_msgBox from 'mixin/msgBox.js';
+import { setCookie } from 'api/user';
 import { reg } from 'api/reg';
 export default {
   name: 'register',
@@ -77,16 +78,16 @@ export default {
       };
       reg(this.user)
         .then((respone) => {
-        	console.log(respone);
           if (respone.data == 'fail') {
             this.changeCfg('该邮箱已被使用', '注册失败');
           } else {
+            setCookie({ name: 'token', val: respone.data.user_email });
             this.$store.commit('SET_CURUSER', respone.data);
             this.$router.push('/');
           }
         })
         .catch((error) => {
-          throw new Error(error);
+          throw error;
         })
     }
   }
