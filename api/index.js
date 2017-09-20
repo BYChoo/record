@@ -6,6 +6,7 @@ const csv = require('node-csv').createParser();
 const async = require('async');
 const crypto = require('crypto');
 const md5 = crypto.createHash('md5');
+const nodeExcel = require('excel-export');
 
 // 数据库操作逻辑
 const person = require('../model/person.js');
@@ -14,6 +15,11 @@ const absent = require('../model/absent.js');
 const User = require('../model/user.js');
 
 // 挂载路由: "/api"
+
+// 导出excal
+router.get('/excel',(req,res) => {
+  res.end("标题,标题,标题\n1,2,3\n4,5,6");
+})
 
 // 上传班级文件并存入数据库
 router.post('/uploadFile', (req, res) => {
