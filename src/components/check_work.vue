@@ -12,7 +12,7 @@
   </div>
 </template>
 <script>
-import topBar from 'components/common/topBar.vue';
+import topBar from 'components/topBar.vue';
 import { getDayAbsent } from 'api/checkWork';
 export default {
   name: 'check_work',
@@ -36,14 +36,13 @@ export default {
       return;
     };
 
-    let _self = this;
     getDayAbsent({
         objDate: this.$store.state.cls.curDate,
         cls_name: this.$route.query.cls_name,
         email: this.$store.state.user.user.user_email
       })
       .then((respone) => {
-        _self.students = respone.data;
+        this.students = respone.data;
       }).catch((error) => {
         throw new Error(error);
       })

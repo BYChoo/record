@@ -20,7 +20,7 @@
   </div>
 </template>
 <script>
-import mixin_msgBox from '../mixin/msgBox.js';
+import mixin_msgBox from 'mixin/msgBox.js';
 import { upload } from 'api/importRoster';
 export default {
   name: 'import_roster',

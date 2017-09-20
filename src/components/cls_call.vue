@@ -13,8 +13,8 @@
   </div>
 </template>
 <script>
-import mixin_msgBox from '../mixin/msgBox.js';
-import topBar from 'components/common/topBar.vue';
+import mixin_msgBox from 'mixin/msgBox.js';
+import topBar from 'components/topBar.vue';
 import { addCutStudents, getCls } from 'api/clsCall';
 export default {
   name: 'cls_call',

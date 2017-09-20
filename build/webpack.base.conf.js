@@ -22,7 +22,9 @@ module.exports = {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
       'components': resolve('src/components'),
+      'views': resolve('src/views'),
       'api': resolve('src/api'),
+      'mixin': resolve('src/mixin'),
       'utils': resolve('src/utils')
     }
   },

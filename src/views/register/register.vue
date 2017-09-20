@@ -51,7 +51,7 @@
   </div>
 </template>
 <script>
-import mixin_msgBox from '../mixin/msgBox.js';
+import mixin_msgBox from 'mixin/msgBox.js';
 import { reg } from 'api/reg';
 export default {
   name: 'register',

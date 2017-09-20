@@ -11,7 +11,7 @@
   </div>
 </template>
 <script>
-import topBar from './common/topBar.vue';
+import topBar from 'components/topBar.vue';
 import { getAllRestor, getNoTodayAbsent } from 'api/selectCls';
 export default {
   name: 'select_cls',
@@ -52,7 +52,7 @@ export default {
     let todaytTime = new Date(today.getFullYear(), today.getMonth(), today.getDate());
     // today
     if (dataDate.getTime() === todaytTime.getTime()) {
-      this.reUrl = 'restor';
+      this.reUrl = 'options';
       getAllRestor({
           user_email: this.$store.state.user.user.user_email
         })
@@ -60,7 +60,7 @@ export default {
           this.$store.commit('SET_ALLCLS', respone.data);
         })
         .catch((error) => {
-          throw new Error(error);
+          throw error;
         })
     } else {
       // noToday
@@ -91,7 +91,7 @@ export default {
           this.$store.commit('SET_ALLCLS', clsArr);
         })
         .catch((error) => {
-          console.log(error);
+          throw error;
         })
     }
   }

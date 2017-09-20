@@ -31,7 +31,6 @@
   </div>
 </template>
 <script>
-import restor from './restor.vue';
 import { getCaledarDay, checkAbsent } from 'api/calendar';
 import { setCookie, getCookie, cookieLogin } from 'api/user';
 export default {
@@ -87,11 +86,9 @@ export default {
 
     // 设置当前日期是否显示迟到
     set_absentDay() {
-      const _self = this;
       const email = this.$store.state.user.user.user_email;
       getCaledarDay({ year: this.monthData.year, month: this.monthData.month, email })
         .then((respone) => {
-          console.log(respone);
           respone.data.data.forEach((item, index) => {
             let day = this.filter({
               year: item.absend_year,
@@ -126,7 +123,7 @@ export default {
       let todaytTime = new Date(today.getFullYear(), today.getMonth(), today.getDate());
       // 点击的日期是今天
       if (dataDate.getTime() === todaytTime.getTime()) {
-        this.$router.push('restor');
+        this.$router.push('/options');
       } else {
         // 点击的日期不是今天
         this.$router.push('select_cls');

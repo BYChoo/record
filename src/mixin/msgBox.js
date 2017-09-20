@@ -1,7 +1,7 @@
 /**
  * 此文件是为了各个有使用到弹出框的组件而使用的混合
  */
-import msgBox from '../components/common/msgBox.vue';
+import msgBox from 'components/msgBox.vue';
 export default {
   data() {
     return {

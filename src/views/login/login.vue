@@ -23,7 +23,7 @@
   </div>
 </template>
 <script>
-import mixin_msgBox from '../mixin/msgBox.js';
+import mixin_msgBox from 'mixin/msgBox.js';
 import { sendLogin } from 'api/login';
 import { setCookie } from 'api/user';
 export default {

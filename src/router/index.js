@@ -3,15 +3,14 @@ import Router from 'vue-router';
 
 Vue.use(Router);
 
-const calendar = resolve => require(['components/calendar.vue'], resolve);
-const restor = resolve => require(['components/restor.vue'], resolve);
-const import_restor = resolve => require(['components/import_roster.vue'], resolve);
-const select_restor = resolve => require(['components/select_restor.vue'], resolve);
+const index = resolve => require(['views/index/index.vue'], resolve);
+const options = resolve => require(['views/options/options.vue'], resolve);
+const select_restor = resolve => require(['views/options/childrens/select_restor.vue'], resolve);
 const check_work = resolve => require(['components/check_work.vue'], resolve);
 const cls_call = resolve => require(['components/cls_call.vue'], resolve);
-const select_cls = resolve => require(['components/select_cls.vue'], resolve);
-const register = resolve => require(['components/register.vue'], resolve);
-const login = resolve => require(['components/login.vue'], resolve);
+const select_cls = resolve => require(['views/options/childrens/select_cls.vue'], resolve);
+const register = resolve => require(['views/register/register.vue'], resolve);
+const login = resolve => require(['views/login/login.vue'], resolve);
 
 const router = new Router({
   mode: 'history',
@@ -20,16 +19,12 @@ const router = new Router({
   },
   routes: [{
     path: '/',
-    name: 'calendar',
-    component: calendar
+    name: 'index',
+    component: index
   }, {
-    path: '/restor',
-    name: 'restor',
-    component: restor
-  }, {
-    path: '/import_roster',
-    name: 'import_roster',
-    component: import_restor
+    path: '/options',
+    name: 'options',
+    component: options
   }, {
     path: '/select_restor',
     name: 'select_restor',

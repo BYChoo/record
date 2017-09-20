@@ -1,6 +1,6 @@
 <template>
   <div id="select_restor">
-    <topBar :title=" '请选择已导入名册' " :reUrl=" `restor` "></topBar>
+    <topBar :title=" '请选择已导入名册' " :reUrl=" `options` "></topBar>
     <ul id="demo">
       <li v-for=" item in ALLCLS " class="clearfix item" @click=" changeUrl(item.cls_name) ">
         <span>{{ item.cls_name }}</span>
@@ -10,7 +10,7 @@
   </div>
 </template>
 <script>
-import topBar from './common/topBar.vue';
+import topBar from 'components/topBar.vue';
 import { getAllRestor } from 'api/selectRestor';
 export default {
   name: 'select_restor',
